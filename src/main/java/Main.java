@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args){
         JFrame main_GUI = new JFrame("Victory");
         main_GUI.setTitle ("Calc_GI");
-        main_GUI.setBounds(600,800,800,600);
+        main_GUI.setBounds(600,400,900,600);
         main_GUI.setResizable(false);
         main_GUI.setVisible(true);
 
