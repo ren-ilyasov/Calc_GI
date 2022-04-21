@@ -7,5 +7,9 @@ public class Main {
         main_GUI.setBounds(500,400,400,500);
         main_GUI.setResizable(false);
         main_GUI.setVisible(true);
+
+        JPanel main_panel = new JPanel();
+        main_panel.setLayout(null);
+        main_GUI.add(main_panel);
     }
 }
