@@ -1,7 +1,5 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +13,7 @@ public class Main {
 
         JPanel main_panel = new JPanel();
         main_panel.setLayout(null);
+        main_panel.setBackground(new Color(224, 230, 245));
         main_GUI.add(main_panel);
 
         JLabel label1 = new JLabel("Откуда");
@@ -43,7 +42,7 @@ public class Main {
         main_panel.add(label6);
 
         JLabel label5 = new JLabel("ПРОСТОЙ КАЛЬКУЛЯТОР ДЛЯ РАСЧЕТА СТОИМОСТИ ПЕРЕВОЗКИ ГРУЗА");
-        label5.setBounds(150,170,800,30);
+        label5.setBounds(150,170,900,30);
         label5.setAlignmentX(Component.CENTER_ALIGNMENT);
         label5.setFont(new Font("Times New Roman", Font.PLAIN, 22));
         main_panel.add(label5);
@@ -187,7 +186,7 @@ public class Main {
         button_create.setBounds(350,290,350,50);
         button_create.setBackground(new Color(255, 147, 3));
         button_create.setForeground(Color.white);
-        button_create.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        button_create.setFont(new Font("Times New Roman", Font.BOLD, 20));
         ActionListener actionListener3 = e -> {
 
         };
