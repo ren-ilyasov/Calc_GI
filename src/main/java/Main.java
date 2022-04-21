@@ -5,6 +5,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    static String[] items = {
+            "Москва",
+            "Санкт-Петербург",
+            "Новосибирск",
+            "Екатеринбург",
+            "Казань",
+            "Нижний Новгород",
+            "Челябинск",
+            "Самара",
+            "Омск",
+            "Ростов-на-Дону",
+            "Уфа",
+            "Красноярск",
+            "Воронеж",
+            "Пермь",
+            "Волгоград"
+    };
+
+    static String last_item_selected1 = items[0];
+    static JComboBox<String> combo_tarif;
+
+    static String last_item_selected2 = items[1];
+    static JComboBox<String> combo_tarif2;
+
     public static void main(String[] args){
         JFrame main_GUI = new JFrame("Victory");
         main_GUI.setTitle ("Calc_GI");
@@ -47,29 +71,28 @@ public class Main {
         label5.setFont(new Font("Times New Roman", Font.PLAIN, 22));
         main_panel.add(label5);
 
-        String[] items = {
-                "Москва",
-                "Санкт-Петербург",
-                "Новосибирск",
-                "Екатеринбург",
-                "Казань",
-                "Нижний Новгород",
-                "Челябинск",
-                "Самара",
-                "Омск",
-                "Ростов-на-Дону",
-                "Уфа",
-                "Красноярск",
-                "Воронеж",
-                "Пермь",
-                "Волгоград"
-        };
-        JComboBox<String> combo_tarif = new JComboBox<>(items);
-        combo_tarif.setSelectedItem(0);
+
+        combo_tarif = new JComboBox<>(items);
+        combo_tarif.setSelectedItem(last_item_selected1);
         combo_tarif.setBounds(150,240,150,30);
         combo_tarif.setFont(new Font("Times New Roman", Font.ITALIC, 18));
         ActionListener actionListener = e -> {
+            String selected_item1 = (String) combo_tarif.getSelectedItem();
+            String selected_item2 = (String) combo_tarif2.getSelectedItem();
 
+            if (selected_item1.equals(selected_item2)){
+                JOptionPane.showMessageDialog(null,
+                        "Доставка в тот же город не производится",
+                        "Неверно указан город!",
+                        JOptionPane.WARNING_MESSAGE);
+
+                combo_tarif.setSelectedItem(last_item_selected1);
+                combo_tarif2.setSelectedItem(last_item_selected2);
+            }
+            else{
+                last_item_selected1 = selected_item1;
+                last_item_selected2 = selected_item2;
+            }
         };
 
         combo_tarif.setBackground(new Color(255, 255, 255));
@@ -78,16 +101,13 @@ public class Main {
 
         //Выпадающий список 2
         {
-
-            JComboBox<String> combo_tarif2 = new JComboBox<>(items);
-            combo_tarif2.setSelectedItem(0);
+            combo_tarif2 = new JComboBox<>(items);
+            combo_tarif2.setSelectedItem(last_item_selected2);
             combo_tarif2.setBounds(350, 240, 150, 30);
             combo_tarif2.setFont(new Font("Times New Roman", Font.ITALIC, 18));
-            ActionListener actionListener2 = e -> {
 
-            };
             combo_tarif2.setBackground(new Color(255, 255, 255));
-            combo_tarif2.addActionListener(actionListener2);
+            combo_tarif2.addActionListener(actionListener);
             main_panel.add(combo_tarif2);
         }
 
@@ -117,7 +137,7 @@ public class Main {
                             JOptionPane.showMessageDialog(null,
                                     "Введите целое число от 1 до 68000 включительно",
                                     "Неверно введены значения!",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.WARNING_MESSAGE);
                         }
                 }
                 else{
@@ -152,7 +172,7 @@ public class Main {
                             JOptionPane.showMessageDialog(null,
                                     "Длина до 1573 см \n Ширина до 277 см \n Высота до 327 см ",
                                     "Неверно введены значения!",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.WARNING_MESSAGE);
                         }
                     }
                 }
