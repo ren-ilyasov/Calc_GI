@@ -37,8 +37,8 @@ public class Main {
         label4.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label4);
 
-        JLabel label6 = new JLabel("Длина, Ширина, Высота (см)");
-        label6.setBounds(750,270,240,30);
+        JLabel label6 = new JLabel("[Длина Ширина Высота] (через пробел)");
+        label6.setBounds(750,270,300,30);
         label6.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         main_panel.add(label6);
 
@@ -154,6 +154,33 @@ public class Main {
             volume.setVisible(true);
             volume.setFont(new Font("Times New Roman", Font.PLAIN, 16));
             main_panel.add(volume);
+            ActionListener actionListener5 = e -> {
+                String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(volume.getText());
+                if (matcher.matches()){
+                    String[] nums = volume.getText().split(" ");
+                    int[] edges = {1572, 276, 326};
+
+                    for (int i = 0; i < 3; i++){
+                        int value = Integer.parseInt(nums[i]);
+
+                        if (value > edges[i] || value == 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Длина до 1573 см \n Ширина до 277 см \n Высота до 327 см ",
+                                    "Неверно введены значения!",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,
+                            "Длина до 1573 см \nШирина до 277 см \nВысота до 327 см ",
+                            "Неверно введены значения!",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            };
+            volume.addActionListener(actionListener5);
         }
 
         JButton button_create = new JButton("РАССЧИТАТЬ СТОИМОСТЬ");
