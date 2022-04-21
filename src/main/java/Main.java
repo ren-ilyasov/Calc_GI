@@ -32,6 +32,8 @@ public class Main {
     static String last_item_selected2 = items[1];
     static JComboBox<String> combo_tarif2;
 
+    static TextField weight;
+
     static JLabel labelOutput;
 
     public static void main(String[] args){
@@ -127,32 +129,11 @@ public class Main {
 
         //Текстовое поле "Вес"
         {
-            TextField weight = new TextField("");
+            weight = new TextField("");
             weight.setBounds(550, 240, 150, 30);
             weight.setVisible(true);
             weight.setFont(new Font("Times New Roman", Font.PLAIN, 16));
             main_panel.add(weight);
-            ActionListener actionListener4 = e -> {
-                String regex ="\\d{1,5}";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(weight.getText());
-                if (matcher.matches()){
-                    int value = Integer.parseInt(weight.getText());
-                        if (value > 68000 || value == 0) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Введите целое число от 1 до 68000 включительно",
-                                    "Неверно введены значения!",
-                                    JOptionPane.WARNING_MESSAGE);
-                        }
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,
-                            "Введите целое число от 1 до 68000 включительно",
-                            "Неверно введены значения!",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            };
-            weight.addActionListener(actionListener4);
         }
 
         //Текстовое поле "Объём"
@@ -212,8 +193,42 @@ public class Main {
                 Sum /= 3.5;
             }
 
-            labelOutput.setText(String.valueOf(Sum));
-            labelOutput.setVisible(true);
+            String regex ="\\d{1,5}";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(weight.getText());
+            if (matcher.matches()){
+                int value = Integer.parseInt(weight.getText());
+                if (value > 68000 || value == 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Введите целое число от 1 до 68000 включительно",
+                            "Неверно введены значения!",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                if(value>1.0 &&value<=500.0){
+                    value*=24;
+                }
+                else if(value>500.0 &&value<=1000.0){
+                    value*=23;
+                }
+                else if(value>1000.0 &&value<=2000.0){
+                    value*=22;
+                }
+                else if(value>2000.0) {
+                    value *= 21;
+                }
+
+                value*=Sum;
+                labelOutput.setText(String.valueOf(value));
+                labelOutput.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,
+                        "Введите целое число от 1 до 68000 включительно",
+                        "Неверно введены значения!",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+
         };
         button_create.addActionListener(actionListener3);
         main_panel.add(button_create);
