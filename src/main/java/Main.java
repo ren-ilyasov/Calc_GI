@@ -9,7 +9,6 @@ public class Main {
         main_GUI.setTitle ("Calc_GI");
         main_GUI.setBounds(600,400,900,600);
         main_GUI.setResizable(false);
-        main_GUI.setVisible(true);
 
         JPanel main_panel = new JPanel();
         main_panel.setLayout(null);
@@ -33,5 +32,7 @@ public class Main {
         combo_tarif.setBackground(new Color(154,132,223));
         combo_tarif.addActionListener(actionListener);
         main_panel.add(combo_tarif);
+
+        main_GUI.setVisible(true);
     }
 }
