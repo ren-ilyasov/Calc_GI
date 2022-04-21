@@ -3,6 +3,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args){
@@ -31,9 +33,14 @@ public class Main {
         main_panel.add(label3);
 
         JLabel label4 = new JLabel("Объём, м3");
-        label4.setBounds(750,210,100,30);
+        label4.setBounds(750,210,120,30);
         label4.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         main_panel.add(label4);
+
+        JLabel label6 = new JLabel("Длина, Ширина, Высота (см)");
+        label6.setBounds(750,270,240,30);
+        label6.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        main_panel.add(label6);
 
         JLabel label5 = new JLabel("ПРОСТОЙ КАЛЬКУЛЯТОР ДЛЯ РАСЧЕТА СТОИМОСТИ ПЕРЕВОЗКИ ГРУЗА");
         label5.setBounds(150,170,800,30);
@@ -88,16 +95,37 @@ public class Main {
 
         //Текстовое поле "Вес"
         {
-            TextField weight = new TextField("Введите вес (КГ)");
+            TextField weight = new TextField("");
             weight.setBounds(550, 240, 150, 30);
             weight.setVisible(true);
             weight.setFont(new Font("Times New Roman", Font.PLAIN, 16));
             main_panel.add(weight);
+            ActionListener actionListener4 = e -> {
+                String regex ="\\d{1,5}";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(weight.getText());
+                if (matcher.matches()){
+                    int value = Integer.parseInt(weight.getText());
+                        if (value > 68000 || value == 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Введите целое число от 1 до 68000 включительно",
+                                    "Неверно введены значения!",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,
+                            "Введите целое число от 1 до 68000 включительно",
+                            "Неверно введены значения!",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+            };
+            weight.addActionListener(actionListener4);
         }
 
         //Текстовое поле "Объём"
         {
-            TextField volume = new TextField("Длина, Ширина, Высота (см)");
+            TextField volume = new TextField("");
             volume.setBounds(750, 240, 240, 30);
             volume.setVisible(true);
             volume.setFont(new Font("Times New Roman", Font.PLAIN, 16));
