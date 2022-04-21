@@ -73,7 +73,7 @@ public class Main {
 
         };
 
-        combo_tarif.setBackground(new Color(154,132,223));
+        combo_tarif.setBackground(new Color(255, 255, 255));
         combo_tarif.addActionListener(actionListener);
         main_panel.add(combo_tarif);
 
@@ -103,7 +103,7 @@ public class Main {
             ActionListener actionListener2 = e -> {
 
             };
-            combo_tarif2.setBackground(new Color(154, 132, 223));
+            combo_tarif2.setBackground(new Color(255, 255, 255));
             combo_tarif2.addActionListener(actionListener2);
             main_panel.add(combo_tarif2);
         }
