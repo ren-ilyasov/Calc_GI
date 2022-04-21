@@ -78,24 +78,8 @@ public class Main {
 
         //Выпадающий список 2
         {
-            String[] items2 = {
-                    "Москва",
-                    "Санкт-Петербург",
-                    "Новосибирск",
-                    "Екатеринбург",
-                    "Казань",
-                    "Нижний Новгород",
-                    "Челябинск",
-                    "Самара",
-                    "Омск",
-                    "Ростов-на-Дону",
-                    "Уфа",
-                    "Красноярск",
-                    "Воронеж",
-                    "Пермь",
-                    "Волгоград"
-            };
-            JComboBox<String> combo_tarif2 = new JComboBox<>(items2);
+
+            JComboBox<String> combo_tarif2 = new JComboBox<>(items);
             combo_tarif2.setSelectedItem(0);
             combo_tarif2.setBounds(350, 240, 150, 30);
             combo_tarif2.setFont(new Font("Times New Roman", Font.ITALIC, 18));
