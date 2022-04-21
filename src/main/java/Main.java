@@ -19,27 +19,27 @@ public class Main {
 
         JLabel label1 = new JLabel("Откуда");
         label1.setBounds(150,210,100,30);
-        label1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        label1.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label1);
 
         JLabel label2 = new JLabel("Куда");
         label2.setBounds(350,210,100,30);
-        label2.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        label2.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label2);
 
         JLabel label3 = new JLabel("Вес, кг");
         label3.setBounds(550,210,100,30);
-        label3.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        label3.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label3);
 
         JLabel label4 = new JLabel("Объём, м3");
         label4.setBounds(750,210,120,30);
-        label4.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        label4.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label4);
 
         JLabel label6 = new JLabel("Длина, Ширина, Высота (см)");
         label6.setBounds(750,270,240,30);
-        label6.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        label6.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         main_panel.add(label6);
 
         JLabel label5 = new JLabel("ПРОСТОЙ КАЛЬКУЛЯТОР ДЛЯ РАСЧЕТА СТОИМОСТИ ПЕРЕВОЗКИ ГРУЗА");
@@ -68,7 +68,7 @@ public class Main {
         JComboBox<String> combo_tarif = new JComboBox<>(items);
         combo_tarif.setSelectedItem(0);
         combo_tarif.setBounds(150,240,150,30);
-        combo_tarif.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        combo_tarif.setFont(new Font("Times New Roman", Font.ITALIC, 18));
         ActionListener actionListener = e -> {
 
         };
@@ -99,7 +99,7 @@ public class Main {
             JComboBox<String> combo_tarif2 = new JComboBox<>(items2);
             combo_tarif2.setSelectedItem(0);
             combo_tarif2.setBounds(350, 240, 150, 30);
-            combo_tarif2.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+            combo_tarif2.setFont(new Font("Times New Roman", Font.ITALIC, 18));
             ActionListener actionListener2 = e -> {
 
             };
@@ -160,7 +160,7 @@ public class Main {
         button_create.setBounds(350,290,350,50);
         button_create.setBackground(new Color(255, 147, 3));
         button_create.setForeground(Color.white);
-        button_create.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+        button_create.setFont(new Font("Times New Roman", Font.BOLD, 22));
         ActionListener actionListener3 = e -> {
 
         };
