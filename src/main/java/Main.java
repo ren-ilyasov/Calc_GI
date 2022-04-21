@@ -1,6 +1,9 @@
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +31,8 @@ public class Main {
 
     static String last_item_selected2 = items[1];
     static JComboBox<String> combo_tarif2;
+
+    static JLabel labelOutput;
 
     public static void main(String[] args){
         JFrame main_GUI = new JFrame("Victory");
@@ -113,7 +118,7 @@ public class Main {
 
         //Вывод результата
         {
-            JLabel labelOutput = new JLabel("Результат:");
+            labelOutput = new JLabel("Результат:");
             labelOutput.setBounds(30, 300, 250, 30);
             labelOutput.setVisible(false);
             labelOutput.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -192,7 +197,23 @@ public class Main {
         button_create.setForeground(Color.white);
         button_create.setFont(new Font("Times New Roman", Font.BOLD, 20));
         ActionListener actionListener3 = e -> {
+            Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,4.0,1.1,1.6,1.8};
 
+            int item_selected1 = Arrays.asList(items).indexOf(last_item_selected1);
+            int item_selected2 = Arrays.asList(items).indexOf(last_item_selected2);
+            Double Sum=koef[item_selected1]+koef[item_selected2];
+            if(Sum>2.0 &&Sum<=4.0){
+                Sum/=2;
+            }
+            else if(Sum>4.0 &&Sum<=5.0){
+                Sum/=2.5;
+            }
+            else if(Sum>5.0) {
+                Sum /= 3.5;
+            }
+
+            labelOutput.setText(String.valueOf(Sum));
+            labelOutput.setVisible(true);
         };
         button_create.addActionListener(actionListener3);
         main_panel.add(button_create);
