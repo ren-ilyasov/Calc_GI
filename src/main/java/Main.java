@@ -108,7 +108,7 @@ public class Main {
         button_create.setBounds(350,290,350,50);
         button_create.setBackground(new Color(255, 147, 3));
         button_create.setForeground(Color.white);
-        button_create.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+        button_create.setFont(new Font("Times New Roman", Font.PLAIN, 22));
         ActionListener actionListener3 = e -> {
 
         };
