@@ -141,7 +141,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null,
                             "Введите целое число от 1 до 68000 включительно",
                             "Неверно введены значения!",
-                            JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.WARNING_MESSAGE);
                 }
             };
             weight.addActionListener(actionListener4);
