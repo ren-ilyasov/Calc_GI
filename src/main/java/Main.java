@@ -1,8 +1,11 @@
-
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.BaseFont;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,6 +92,7 @@ public class Main {
             String selected_item1 = (String) combo_tarif.getSelectedItem();
             String selected_item2 = (String) combo_tarif2.getSelectedItem();
 
+            assert selected_item1 != null;
             if (selected_item1.equals(selected_item2)){
                 JOptionPane.showMessageDialog(null,
                         "Доставка в тот же город не производится",
@@ -153,10 +157,7 @@ public class Main {
         button_create.setForeground(Color.white);
         button_create.setFont(new Font("Times New Roman", Font.BOLD, 20));
         ActionListener actionListener3 = e -> {
-            String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(volume.getText());
-            if (matcher.matches()){
+            if (check_volume_format(volume.getText())){
                 String[] nums = volume.getText().split(" ");
                 int[] edges = {1572, 276, 326};
 
@@ -170,6 +171,7 @@ public class Main {
                                 "Длина до 1573 см \n Ширина до 277 см \n Высота до 327 см ",
                                 "Неверно введены значения!",
                                 JOptionPane.WARNING_MESSAGE);
+                        return;
                     }
                     else{
                         triple*=value;
@@ -190,6 +192,7 @@ public class Main {
                             "Посылки менее 1 кубического метра\nОтправляются по почте",
                             "Неверно введены значения!",
                             JOptionPane.INFORMATION_MESSAGE);
+                    return;
                 }
             }
             else{
@@ -197,13 +200,14 @@ public class Main {
                         "Длина до 1573 см \nШирина до 277 см \nВысота до 327 см ",
                         "Неверно введены значения!",
                         JOptionPane.WARNING_MESSAGE);
+                return;
             }
 
             Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,4.0,1.1,1.6,1.8};
 
             int item_selected1 = Arrays.asList(items).indexOf(last_item_selected1);
             int item_selected2 = Arrays.asList(items).indexOf(last_item_selected2);
-            Double Sum=koef[item_selected1]+koef[item_selected2];
+            double Sum=koef[item_selected1]+koef[item_selected2];
             if(Sum>2.0 &&Sum<=4.0){
                 Sum/=2;
             }
@@ -214,9 +218,9 @@ public class Main {
                 Sum /= 3.5;
             }
 
-            regex ="\\d{1,5}";
-            pattern = Pattern.compile(regex);
-            matcher = pattern.matcher(weight.getText());
+            String regex ="\\d{1,5}";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(weight.getText());
             if (matcher.matches()){
                 int value = Integer.parseInt(weight.getText());
                 if (value > 68000 || value == 0) {
@@ -240,8 +244,29 @@ public class Main {
                 }
 
                 value*=Sum;
-                labelOutput.setText("Итоговая стоимость: "+ String.valueOf(value) +" рублей");
+                labelOutput.setText("Итоговая стоимость: "+ value +" рублей");
                 labelOutput.setVisible(true);
+
+                try {
+                    CreatePDF pdf = new CreatePDF("PDF.pdf", BaseFont.createFont(BaseFont.TIMES_ROMAN, BaseFont.WINANSI, false));
+                    Document document = pdf.getDocument();
+                    document.open();
+
+                    document.addTitle("Result report");
+
+                    pdf.addText(document,"Ship coefficient: " + Sum, 18,true);
+
+                    pdf.addText(document,"Weight: " + weight.getText() + " Kg", 18,true);
+
+                    pdf.addText(document,"Volume: " + volume.getText() + " m3", 18,true);
+
+                    pdf.addText(document,"Result: " + value + " rubbles", 18,true);
+
+                    document.close();
+                }
+                catch (DocumentException | IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null,
@@ -249,12 +274,18 @@ public class Main {
                         "Неверно введены значения!",
                         JOptionPane.WARNING_MESSAGE);
             }
-
         };
         button_create.addActionListener(actionListener3);
         main_panel.add(button_create);
 
         main_GUI.setVisible(true);
         main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static boolean check_volume_format(String volume){
+        String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(volume);
+        return matcher.matches();
     }
 }
