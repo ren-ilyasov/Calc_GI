@@ -34,6 +34,8 @@ public class Main {
 
     static TextField weight;
 
+    static TextField volume;
+
     static JLabel labelOutput;
 
     public static void main(String[] args){
@@ -138,38 +140,11 @@ public class Main {
 
         //Текстовое поле "Объём"
         {
-            TextField volume = new TextField("");
+            volume = new TextField("");
             volume.setBounds(750, 240, 240, 30);
             volume.setVisible(true);
             volume.setFont(new Font("Times New Roman", Font.PLAIN, 16));
             main_panel.add(volume);
-            ActionListener actionListener5 = e -> {
-                String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(volume.getText());
-                if (matcher.matches()){
-                    String[] nums = volume.getText().split(" ");
-                    int[] edges = {1572, 276, 326};
-
-                    for (int i = 0; i < 3; i++){
-                        int value = Integer.parseInt(nums[i]);
-
-                        if (value > edges[i] || value == 0) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Длина до 1573 см \n Ширина до 277 см \n Высота до 327 см ",
-                                    "Неверно введены значения!",
-                                    JOptionPane.WARNING_MESSAGE);
-                        }
-                    }
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,
-                            "Длина до 1573 см \nШирина до 277 см \nВысота до 327 см ",
-                            "Неверно введены значения!",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            };
-            volume.addActionListener(actionListener5);
         }
 
         JButton button_create = new JButton("РАССЧИТАТЬ СТОИМОСТЬ");
@@ -178,6 +153,46 @@ public class Main {
         button_create.setForeground(Color.white);
         button_create.setFont(new Font("Times New Roman", Font.BOLD, 20));
         ActionListener actionListener3 = e -> {
+            String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(volume.getText());
+            if (matcher.matches()){
+                String[] nums = volume.getText().split(" ");
+                int[] edges = {1572, 276, 326};
+
+                int triple = 1;
+
+                for (int i = 0; i < 3; i++){
+                    int value = Integer.parseInt(nums[i]);
+
+                    if (value > edges[i] || value == 0) {
+                        JOptionPane.showMessageDialog(null,
+                                "Длина до 1573 см \n Ширина до 277 см \n Высота до 327 см ",
+                                "Неверно введены значения!",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                    else{
+                        triple*=value;
+                    }
+
+                }
+
+                triple/=1000000;
+                volume.setText(Integer.toString(triple));
+                if (triple>140.0){
+                    JOptionPane.showMessageDialog(null,
+                            "Вагон не вмещает груз",
+                            "Неверно введены значения!",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,
+                        "Длина до 1573 см \nШирина до 277 см \nВысота до 327 см ",
+                        "Неверно введены значения!",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+
             Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,4.0,1.1,1.6,1.8};
 
             int item_selected1 = Arrays.asList(items).indexOf(last_item_selected1);
@@ -193,9 +208,9 @@ public class Main {
                 Sum /= 3.5;
             }
 
-            String regex ="\\d{1,5}";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(weight.getText());
+            regex ="\\d{1,5}";
+            pattern = Pattern.compile(regex);
+            matcher = pattern.matcher(weight.getText());
             if (matcher.matches()){
                 int value = Integer.parseInt(weight.getText());
                 if (value > 68000 || value == 0) {
