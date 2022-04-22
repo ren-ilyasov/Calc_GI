@@ -123,7 +123,7 @@ public class Main {
         //Вывод результата
         {
             labelOutput = new JLabel("Результат:");
-            labelOutput.setBounds(30, 300, 250, 30);
+            labelOutput.setBounds(350, 350, 250, 30);
             labelOutput.setVisible(false);
             labelOutput.setFont(new Font("Times New Roman", Font.PLAIN, 18));
             main_panel.add(labelOutput);
@@ -184,6 +184,12 @@ public class Main {
                             "Вагон не вмещает груз",
                             "Неверно введены значения!",
                             JOptionPane.WARNING_MESSAGE);
+                }
+                else if(triple<1.0 ){
+                    JOptionPane.showMessageDialog(null,
+                            "Посылки менее 1 кубического метра\nОтправляются по почте",
+                            "Неверно введены значения!",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
             else{
