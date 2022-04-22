@@ -75,8 +75,8 @@ public class Main {
         main_panel.add(label3);
 
         //Надпись "Объём, м3"
-        JLabel label4 = new JLabel("Объём, м3");
-        label4.setBounds(800,210,120,30);
+        JLabel label4 = new JLabel("Размеры см, Объём м3");
+        label4.setBounds(800,210,240,30);
         label4.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label4);
 
