@@ -58,7 +58,7 @@ public class Main {
 
         //Надпись "Откуда"
         JLabel label1 = new JLabel("Откуда");
-        label1.setBounds(150,210,100,30);
+        label1.setBounds(100,210,100,30);
         label1.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label1);
 
@@ -70,25 +70,25 @@ public class Main {
 
         //Надпись "Вес, кг"
         JLabel label3 = new JLabel("Вес, кг");
-        label3.setBounds(550,210,100,30);
+        label3.setBounds(600,210,100,30);
         label3.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label3);
 
         //Надпись "Объём, м3"
         JLabel label4 = new JLabel("Объём, м3");
-        label4.setBounds(750,210,120,30);
+        label4.setBounds(800,210,120,30);
         label4.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label4);
 
         //Надпись "Длина, Ширина, Высота"
         JLabel label6 = new JLabel("[Длина Ширина Высота] (через пробел)");
-        label6.setBounds(750,270,300,30);
+        label6.setBounds(800,270,300,30);
         label6.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         main_panel.add(label6);
 
         //Надпись "Калькулятор"
         JLabel label5 = new JLabel("ПРОСТОЙ КАЛЬКУЛЯТОР ДЛЯ РАСЧЕТА СТОИМОСТИ ЖД ПЕРЕВОЗОК");
-        label5.setBounds(150,170,900,30);
+        label5.setBounds(100,170,900,30);
         label5.setAlignmentX(Component.CENTER_ALIGNMENT);
         label5.setFont(new Font("Times New Roman", Font.PLAIN, 22));
         main_panel.add(label5);
@@ -96,7 +96,7 @@ public class Main {
         //Выпадающий список
         combo_tarif = new JComboBox<>(items);
         combo_tarif.setSelectedItem(last_item_selected1);
-        combo_tarif.setBounds(150,240,150,30);
+        combo_tarif.setBounds(100,240,200,30);
         combo_tarif.setFont(new Font("Times New Roman", Font.ITALIC, 18));
         ActionListener actionListener = e -> {
             String selected_item1 = (String) combo_tarif.getSelectedItem();
@@ -128,7 +128,7 @@ public class Main {
         {
             combo_tarif2 = new JComboBox<>(items);
             combo_tarif2.setSelectedItem(last_item_selected2);
-            combo_tarif2.setBounds(350, 240, 150, 30);
+            combo_tarif2.setBounds(350, 240, 200, 30);
             combo_tarif2.setFont(new Font("Times New Roman", Font.ITALIC, 18));
 
             combo_tarif2.setBackground(new Color(255, 255, 255));
@@ -139,7 +139,7 @@ public class Main {
         //Вывод результата
         {
             labelOutput = new JLabel("Результат:");
-            labelOutput.setBounds(250, 380, 750, 50);
+            labelOutput.setBounds(300, 380, 750, 50);
             labelOutput.setVisible(false);
             labelOutput.setFont(new Font("Times New Roman", Font.ITALIC, 32));
             main_panel.add(labelOutput);
@@ -148,7 +148,7 @@ public class Main {
         //Текстовое поле "Вес"
         {
             weight = new TextField("");
-            weight.setBounds(550, 240, 150, 30);
+            weight.setBounds(600, 240, 150, 30);
             weight.setVisible(true);
             weight.setFont(new Font("Times New Roman", Font.PLAIN, 16));
             main_panel.add(weight);
@@ -157,7 +157,7 @@ public class Main {
         //Текстовое поле "Объём"
         {
             volume = new TextField("");
-            volume.setBounds(750, 240, 240, 30);
+            volume.setBounds(800, 240, 240, 30);
             volume.setVisible(true);
             volume.setFont(new Font("Times New Roman", Font.PLAIN, 16));
             main_panel.add(volume);
@@ -165,10 +165,10 @@ public class Main {
 
         //Кнопка "РАССЧИТАТЬ СТОИМОСТЬ"
         JButton button_create = new JButton("РАССЧИТАТЬ СТОИМОСТЬ");
-        button_create.setBounds(350,290,350,50);
+        button_create.setBounds(350,320,400,50);
         button_create.setBackground(new Color(255, 147, 3));
         button_create.setForeground(Color.white);
-        button_create.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        button_create.setFont(new Font("Times New Roman", Font.BOLD, 22));
         //Проверка введённых значений
         ActionListener actionListener3 = e -> {
             if (check_volume_format(volume.getText())){
