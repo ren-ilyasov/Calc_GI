@@ -218,10 +218,8 @@ public class Main {
                 Sum /= 3.5;
             }
 
-            String regex ="\\d{1,5}";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(weight.getText());
-            if (matcher.matches()){
+
+            if (check_weight_format(weight.getText())){
                 int value = Integer.parseInt(weight.getText());
                 if (value > 68000 || value == 0) {
                     JOptionPane.showMessageDialog(null,
@@ -286,6 +284,13 @@ public class Main {
         String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(volume);
+        return matcher.matches();
+    }
+
+    public static boolean check_weight_format(String weight){
+        String regex ="\\d{1,5}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(weight);
         return matcher.matches();
     }
 }
