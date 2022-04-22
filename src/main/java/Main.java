@@ -93,6 +93,13 @@ public class Main {
         label5.setFont(new Font("Times New Roman", Font.PLAIN, 22));
         main_panel.add(label5);
 
+        JLabel label7 = new JLabel("Расценки за киллограмм груза: 1кг - 500кг по 24 рубля;" +
+                " 501кг - 1000кг по 23 рубля; 1001кг -  2000кг по 22 рубля; от 2000 кг по 21 рублю!");
+        label7.setBounds(100,450,1000,120);
+        label7.setAlignmentX(Component.CENTER_ALIGNMENT);
+        label7.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        main_panel.add(label7);
+
         //Выпадающий список
         combo_tarif = new JComboBox<>(items);
         combo_tarif.setSelectedItem(last_item_selected1);
