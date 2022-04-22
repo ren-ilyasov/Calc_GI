@@ -87,7 +87,7 @@ public class Main {
         main_panel.add(label6);
 
         //Надпись "Калькулятор"
-        JLabel label5 = new JLabel("ПРОСТОЙ КАЛЬКУЛЯТОР ДЛЯ РАСЧЕТА СТОИМОСТИ ПЕРЕВОЗКИ ГРУЗА");
+        JLabel label5 = new JLabel("ПРОСТОЙ КАЛЬКУЛЯТОР ДЛЯ РАСЧЕТА СТОИМОСТИ ЖД ПЕРЕВОЗОК");
         label5.setBounds(150,170,900,30);
         label5.setAlignmentX(Component.CENTER_ALIGNMENT);
         label5.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -206,8 +206,8 @@ public class Main {
                 //Груз слишком маленький
                 else if(triple<1.0 ){
                     JOptionPane.showMessageDialog(null,
-                            "Посылки менее 1 кубического метра\nОтправляются по почте",
-                            "Неверно введены значения!",
+                            "Груз менее 1 кубического метра\nОтправляются по почте",
+                            "Замечание",
                             JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
@@ -249,7 +249,7 @@ public class Main {
                     return;
                 }
                 //Расчёт коэффициентов для веса груза
-                if(value>1.0 &&value<=500.0){
+                if(value>0 &&value<=500.0){
                     value*=24;
                 }
                 else if(value>500.0 &&value<=1000.0){
@@ -261,6 +261,13 @@ public class Main {
                 else if(value>2000.0) {
                     value *= 21;
                 }
+                    if(value<2000){
+                        value=2000;
+                        JOptionPane.showMessageDialog(null,
+                                "Минимальная стоимость услуги 2000 рублей\nБез учета тарифа",
+                                "Замечание",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
 
                 //Формула расчёта стоимости железнодорожной перевозки
                 value*=Sum;
