@@ -97,7 +97,7 @@ public class Main {
                 " 501кг - 1000кг по 23 рубля; 1001кг -  2000кг по 22 рубля; от 2000 кг по 21 рублю!");
         label7.setBounds(100,450,1000,120);
         label7.setAlignmentX(Component.CENTER_ALIGNMENT);
-        label7.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        label7.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         main_panel.add(label7);
 
         //Выпадающий список
