@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+
+    //Массив городов для рассчета
     static String[] items = {
             "Москва",
             "Санкт-Петербург",
@@ -42,48 +44,56 @@ public class Main {
     static JLabel labelOutput;
 
     public static void main(String[] args){
+        //Окно приложения
         JFrame main_GUI = new JFrame("Victory");
         main_GUI.setTitle ("Calc_GI");
         main_GUI.setBounds(100,100,1150,600);
         main_GUI.setResizable(false);
 
+        //Панель для добавления элементов
         JPanel main_panel = new JPanel();
         main_panel.setLayout(null);
         main_panel.setBackground(new Color(224, 230, 245));
         main_GUI.add(main_panel);
 
+        //Надпись "Откуда"
         JLabel label1 = new JLabel("Откуда");
         label1.setBounds(150,210,100,30);
         label1.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label1);
 
+        //Надпись "Куда"
         JLabel label2 = new JLabel("Куда");
         label2.setBounds(350,210,100,30);
         label2.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label2);
 
+        //Надпись "Вес, кг"
         JLabel label3 = new JLabel("Вес, кг");
         label3.setBounds(550,210,100,30);
         label3.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label3);
 
+        //Надпись "Объём, м3"
         JLabel label4 = new JLabel("Объём, м3");
         label4.setBounds(750,210,120,30);
         label4.setFont(new Font("Times New Roman", Font.BOLD, 18));
         main_panel.add(label4);
 
+        //Надпись "Длина, Ширина, Высота"
         JLabel label6 = new JLabel("[Длина Ширина Высота] (через пробел)");
         label6.setBounds(750,270,300,30);
         label6.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         main_panel.add(label6);
 
+        //Надпись "Калькулятор"
         JLabel label5 = new JLabel("ПРОСТОЙ КАЛЬКУЛЯТОР ДЛЯ РАСЧЕТА СТОИМОСТИ ПЕРЕВОЗКИ ГРУЗА");
         label5.setBounds(150,170,900,30);
         label5.setAlignmentX(Component.CENTER_ALIGNMENT);
         label5.setFont(new Font("Times New Roman", Font.PLAIN, 22));
         main_panel.add(label5);
 
-
+        //Выпадающий список
         combo_tarif = new JComboBox<>(items);
         combo_tarif.setSelectedItem(last_item_selected1);
         combo_tarif.setBounds(150,240,150,30);
@@ -92,6 +102,7 @@ public class Main {
             String selected_item1 = (String) combo_tarif.getSelectedItem();
             String selected_item2 = (String) combo_tarif2.getSelectedItem();
 
+            //Проверка на выбор одинаковых городов
             assert selected_item1 != null;
             if (selected_item1.equals(selected_item2)){
                 JOptionPane.showMessageDialog(null,
@@ -111,6 +122,7 @@ public class Main {
         combo_tarif.setBackground(new Color(255, 255, 255));
         combo_tarif.addActionListener(actionListener);
         main_panel.add(combo_tarif);
+
 
         //Выпадающий список 2
         {
@@ -151,11 +163,13 @@ public class Main {
             main_panel.add(volume);
         }
 
+        //Кнопка "РАССЧИТАТЬ СТОИМОСТЬ"
         JButton button_create = new JButton("РАССЧИТАТЬ СТОИМОСТЬ");
         button_create.setBounds(350,290,350,50);
         button_create.setBackground(new Color(255, 147, 3));
         button_create.setForeground(Color.white);
         button_create.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        //Проверка введённых значений
         ActionListener actionListener3 = e -> {
             if (check_volume_format(volume.getText())){
                 String[] nums = volume.getText().split(" ");
@@ -166,6 +180,7 @@ public class Main {
                 for (int i = 0; i < 3; i++){
                     int value = Integer.parseInt(nums[i]);
 
+                    //Ограничение по размерам
                     if (value > edges[i] || value == 0) {
                         JOptionPane.showMessageDialog(null,
                                 "Длина до 1573 см \n Ширина до 277 см \n Высота до 327 см ",
@@ -179,6 +194,7 @@ public class Main {
 
                 }
 
+                //Груз слишком большой
                 triple/=1000000;
                 volume.setText(String.format("%.2f",triple));
                 if (triple>140.0){
@@ -187,6 +203,7 @@ public class Main {
                             "Неверно введены значения!",
                             JOptionPane.WARNING_MESSAGE);
                 }
+                //Груз слишком маленький
                 else if(triple<1.0 ){
                     JOptionPane.showMessageDialog(null,
                             "Посылки менее 1 кубического метра\nОтправляются по почте",
@@ -195,6 +212,7 @@ public class Main {
                     return;
                 }
             }
+            //Неверно введены значения
             else{
                 JOptionPane.showMessageDialog(null,
                         "Длина до 1573 см \nШирина до 277 см \nВысота до 327 см ",
@@ -203,8 +221,10 @@ public class Main {
                 return;
             }
 
+            //Коэффициенты для городов
             Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,4.0,1.1,1.6,1.8};
 
+            //Алгоритм расчёта коэффициентов
             int item_selected1 = Arrays.asList(items).indexOf(last_item_selected1);
             int item_selected2 = Arrays.asList(items).indexOf(last_item_selected2);
             double Sum=koef[item_selected1]+koef[item_selected2];
@@ -218,7 +238,7 @@ public class Main {
                 Sum /= 3.5;
             }
 
-
+            //Проверка введённых значений веса
             if (check_weight_format(weight.getText())){
                 int value = Integer.parseInt(weight.getText());
                 if (value > 68000 || value == 0) {
@@ -228,6 +248,7 @@ public class Main {
                             JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+                //Расчёт коэффициентов для веса груза
                 if(value>1.0 &&value<=500.0){
                     value*=24;
                 }
@@ -241,10 +262,12 @@ public class Main {
                     value *= 21;
                 }
 
+                //Формула расчёта стоимости железнодорожной перевозки
                 value*=Sum;
                 labelOutput.setText("Итоговая стоимость: "+ value +" рублей");
                 labelOutput.setVisible(true);
 
+                //Ввод данных для создания PDF-документа
                 try {
                     CreatePDF pdf = new CreatePDF("PDF.pdf", BaseFont.createFont(BaseFont.TIMES_ROMAN, BaseFont.WINANSI, false));
                     Document document = pdf.getDocument();
@@ -266,6 +289,7 @@ public class Main {
                     throw new RuntimeException(ex);
                 }
             }
+            //Проверка введённых данных веса груза
             else{
                 JOptionPane.showMessageDialog(null,
                         "Введите целое число от 1 до 68000 включительно",
@@ -280,6 +304,7 @@ public class Main {
         main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    //Проверка формата вводимых данных (Объём)
     public static boolean check_volume_format(String volume){
         String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
         Pattern pattern = Pattern.compile(regex);
@@ -287,6 +312,7 @@ public class Main {
         return matcher.matches();
     }
 
+    //Проверка формата вводимых данных (Вес)
     public static boolean check_weight_format(String weight){
         String regex ="\\d{1,5}";
         Pattern pattern = Pattern.compile(regex);
