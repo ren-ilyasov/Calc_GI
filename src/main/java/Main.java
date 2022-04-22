@@ -123,9 +123,9 @@ public class Main {
         //Вывод результата
         {
             labelOutput = new JLabel("Результат:");
-            labelOutput.setBounds(350, 350, 250, 30);
+            labelOutput.setBounds(250, 380, 750, 50);
             labelOutput.setVisible(false);
-            labelOutput.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+            labelOutput.setFont(new Font("Times New Roman", Font.ITALIC, 32));
             main_panel.add(labelOutput);
         }
 
@@ -160,7 +160,7 @@ public class Main {
                 String[] nums = volume.getText().split(" ");
                 int[] edges = {1572, 276, 326};
 
-                int triple = 1;
+                float triple = 1;
 
                 for (int i = 0; i < 3; i++){
                     int value = Integer.parseInt(nums[i]);
@@ -178,7 +178,7 @@ public class Main {
                 }
 
                 triple/=1000000;
-                volume.setText(Integer.toString(triple));
+                volume.setText(String.format("%.2f",triple));
                 if (triple>140.0){
                     JOptionPane.showMessageDialog(null,
                             "Вагон не вмещает груз",
@@ -240,7 +240,7 @@ public class Main {
                 }
 
                 value*=Sum;
-                labelOutput.setText(String.valueOf(value));
+                labelOutput.setText("Итоговая стоимость: "+ String.valueOf(value) +" рублей");
                 labelOutput.setVisible(true);
             }
             else{
