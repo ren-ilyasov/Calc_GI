@@ -234,7 +234,7 @@ public class Main {
             }
 
             //Коэффициенты для городов
-            Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,4.0,1.1,1.6,1.8};
+            Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,1.8,4.0,1.1,1.6,1.8};
 
             //Алгоритм расчёта коэффициентов
             int item_selected1 = Arrays.asList(Cities.items).indexOf(last_item_selected1);
