@@ -13,28 +13,28 @@ import java.util.regex.Pattern;
 public class Main {
 
     //Массив городов для рассчета
-    static String[] items = {
-            "Москва",
-            "Санкт-Петербург",
-            "Новосибирск",
-            "Екатеринбург",
-            "Казань",
-            "Нижний Новгород",
-            "Челябинск",
-            "Самара",
-            "Омск",
-            "Ростов-на-Дону",
-            "Уфа",
-            "Красноярск",
-            "Воронеж",
-            "Пермь",
-            "Волгоград"
-    };
+//    static String[] items = {
+//            "Москва",
+//            "Санкт-Петербург",
+//            "Новосибирск",
+//            "Екатеринбург",
+//            "Казань",
+//            "Нижний Новгород",
+//            "Челябинск",
+//            "Самара",
+//            "Омск",
+//            "Ростов-на-Дону",
+//            "Уфа",
+//            "Красноярск",
+//            "Воронеж",
+//            "Пермь",
+//            "Волгоград"
+//    };
 
-    static String last_item_selected1 = items[0];
+    static String last_item_selected1 = Cities.items[0];
     static JComboBox<String> combo_tarif;
 
-    static String last_item_selected2 = items[1];
+    static String last_item_selected2 = Cities.items[1];
     static JComboBox<String> combo_tarif2;
 
     static TextField weight;
@@ -44,6 +44,11 @@ public class Main {
     static JLabel labelOutput;
 
     public static void main(String[] args){
+        try {
+            Cities.createFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         //Окно приложения
         JFrame main_GUI = new JFrame("Victory");
         main_GUI.setTitle ("Calc_GI");
@@ -101,7 +106,7 @@ public class Main {
         main_panel.add(label7);
 
         //Выпадающий список
-        combo_tarif = new JComboBox<>(items);
+        combo_tarif = new JComboBox<>(Cities.items);
         combo_tarif.setSelectedItem(last_item_selected1);
         combo_tarif.setBounds(100,240,200,30);
         combo_tarif.setFont(new Font("Times New Roman", Font.ITALIC, 18));
@@ -133,7 +138,7 @@ public class Main {
 
         //Выпадающий список 2
         {
-            combo_tarif2 = new JComboBox<>(items);
+            combo_tarif2 = new JComboBox<>(Cities.items);
             combo_tarif2.setSelectedItem(last_item_selected2);
             combo_tarif2.setBounds(350, 240, 200, 30);
             combo_tarif2.setFont(new Font("Times New Roman", Font.ITALIC, 18));
@@ -232,8 +237,8 @@ public class Main {
             Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,4.0,1.1,1.6,1.8};
 
             //Алгоритм расчёта коэффициентов
-            int item_selected1 = Arrays.asList(items).indexOf(last_item_selected1);
-            int item_selected2 = Arrays.asList(items).indexOf(last_item_selected2);
+            int item_selected1 = Arrays.asList(Cities.items).indexOf(last_item_selected1);
+            int item_selected2 = Arrays.asList(Cities.items).indexOf(last_item_selected2);
             double Sum=koef[item_selected1]+koef[item_selected2];
             if(Sum>2.0 &&Sum<=4.0){
                 Sum/=2;
