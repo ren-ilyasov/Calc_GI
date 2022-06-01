@@ -232,58 +232,57 @@ public class Main {
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-
-            //Коэффициенты для городов
-            Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,1.8,4.0,1.1,1.6,1.8};
-
             //Алгоритм расчёта коэффициентов
             int item_selected1 = Arrays.asList(Cities.items).indexOf(last_item_selected1);
             int item_selected2 = Arrays.asList(Cities.items).indexOf(last_item_selected2);
-            double Sum=koef[item_selected1]+koef[item_selected2];
-            if(Sum>2.0 &&Sum<=4.0){
-                Sum/=2;
-            }
-            else if(Sum>4.0 &&Sum<=5.0){
-                Sum/=2.5;
-            }
-            else if(Sum>5.0) {
-                Sum /= 3.5;
-            }
 
-            //Проверка введённых значений веса
-            if (check_weight_format(weight.getText())){
+            if (check_weight_format(weight.getText())) {
                 int value = Integer.parseInt(weight.getText());
-                if (value > 68000 || value == 0) {
-                    JOptionPane.showMessageDialog(null,
-                            "Введите целое число от 1 до 68000 включительно",
-                            "Неверно введены значения!",
-                            JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-                //Расчёт коэффициентов для веса груза
-                if(value>0 &&value<=500.0){
-                    value*=24;
-                }
-                else if(value>500.0 &&value<=1000.0){
-                    value*=23;
-                }
-                else if(value>1000.0 &&value<=2000.0){
-                    value*=22;
-                }
-                else if(value>2000.0) {
-                    value *= 21;
-                }
-                    if(value<2000){
-                        value=2000;
-                        JOptionPane.showMessageDialog(null,
-                                "Минимальная стоимость услуги 2000 рублей\nБез учета тарифа",
-                                "Замечание",
-                                JOptionPane.INFORMATION_MESSAGE);
-                    }
 
-                //Формула расчёта стоимости железнодорожной перевозки
-                value*=Sum;
-                labelOutput.setText("Итоговая стоимость: "+ value +" рублей");
+                Integer sum=MathModel.price(item_selected1, item_selected2, value);
+//            double Sum=koef[item_selected1]+koef[item_selected2];
+//            if(Sum>2.0 &&Sum<=4.0){
+//                Sum/=2;
+//            }
+//            else if(Sum>4.0 &&Sum<=5.0){
+//                Sum/=2.5;
+//            }
+//            else if(Sum>5.0) {
+//                Sum /= 3.5;
+//            }
+//
+//            //Проверка введённых значений веса
+//                if (value > 68000 || value == 0) {
+//                    JOptionPane.showMessageDialog(null,
+//                            "Введите целое число от 1 до 68000 включительно",
+//                            "Неверно введены значения!",
+//                            JOptionPane.WARNING_MESSAGE);
+//                    return;
+//                }
+//                //Расчёт коэффициентов для веса груза
+//                if(value>0 &&value<=500.0){
+//                    value*=24;
+//                }
+//                else if(value>500.0 &&value<=1000.0){
+//                    value*=23;
+//                }
+//                else if(value>1000.0 &&value<=2000.0){
+//                    value*=22;
+//                }
+//                else if(value>2000.0) {
+//                    value *= 21;
+//                }
+//                    if(value<2000){
+//                        value=2000;
+//                        JOptionPane.showMessageDialog(null,
+//                                "Минимальная стоимость услуги 2000 рублей\nБез учета тарифа",
+//                                "Замечание",
+//                                JOptionPane.INFORMATION_MESSAGE);
+//                    }
+//
+//                //Формула расчёта стоимости железнодорожной перевозки
+//                value*=Sum;
+                labelOutput.setText("Итоговая стоимость: "+ sum +" рублей");
                 labelOutput.setVisible(true);
 
                 //Ввод данных для создания PDF-документа
@@ -294,13 +293,13 @@ public class Main {
 
                     document.addTitle("Result report");
 
-                    pdf.addText(document,"Ship coefficient: " + Sum, 18,true);
+                    pdf.addText(document,"Ship coefficient: " + MathModel.sumkoef, 18,true);
 
                     pdf.addText(document,"Weight: " + weight.getText() + " Kg", 18,true);
 
                     pdf.addText(document,"Volume: " + volume.getText() + " m3", 18,true);
 
-                    pdf.addText(document,"Result: " + value + " rubbles", 18,true);
+                    pdf.addText(document,"Result: " + sum + " rubbles", 18,true);
 
                     document.close();
                 }
