@@ -41,7 +41,6 @@ public class MathModel {
                     "Минимальная стоимость услуги 2000 рублей\nБез учета тарифа",
                     "Замечание",
                     JOptionPane.INFORMATION_MESSAGE);
-            //Формула расчёта стоимости железнодорожной перевозки
         }
         weight*=sumkoef;
         return weight;
