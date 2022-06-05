@@ -282,7 +282,7 @@ public class MainPage {
 
         //Кнопка "ДОБАВИТЬ НОВЫЙ ГОРОД И КОЭФФИЦЕНТ"
         ActionListener actionNewCity = e -> {
-            CreateLoginPassword createLogin = new CreateLoginPassword();
+            CreateCity createCity = new CreateCity();
             main_GUI.setVisible(false);
         };
         JButton buttonNewCity = new JButton("ДОБАВИТЬ ГОРОД");
