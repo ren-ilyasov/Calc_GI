@@ -2,19 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class CreateCity {
-    public CreateCity(){
+public class CreateCity extends Page{
+
+    @Override
+    public void CreateInterface(JFrame main_GUI, JPanel main_panel) {
         //Окно приложения
-        JFrame main_GUI = new JFrame("Login");
         main_GUI.setTitle ("Новый город");
         main_GUI.setBounds(300,400,400,400);
         main_GUI.setResizable(false);
-
-        //Панель для добавления элементов
-        JPanel main_panel = new JPanel();
-        main_panel.setLayout(null);
-        main_panel.setBackground(new Color(224, 230, 245));
-        main_GUI.add(main_panel);
 
         //Надпись "Добавить город"
         JLabel label2 = new JLabel("Добавить город");
@@ -56,9 +51,5 @@ public class CreateCity {
         button_login.setFont(new Font("Times New Roman", Font.BOLD, 22));
         button_login.addActionListener(actionLogin);
         main_panel.add(button_login);
-
-        main_GUI.setVisible(true);
-        main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
 }

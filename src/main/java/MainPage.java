@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainPage {
+public class MainPage extends Page {
 
      String last_item_selected1 = Cities.items[0];
      JComboBox<String> combo_tarif;
@@ -24,15 +24,31 @@ public class MainPage {
 
      JLabel labelOutput;
 
-    public MainPage(){
+    //Проверка формата вводимых данных (Объём)
+    public static boolean check_volume_format(String volume){
+        String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(volume);
+        return matcher.matches();
+    }
+
+    //Проверка формата вводимых данных (Вес)
+    public static boolean check_weight_format(String weight){
+        String regex ="\\d{1,5}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(weight);
+        return matcher.matches();
+    }
+
+    @Override
+    public void CreateInterface(JFrame main_GUI, JPanel main_panel) {
+
         //Окно приложения
-        JFrame main_GUI = new JFrame("Victory");
         main_GUI.setTitle ("Главная Страница");
         main_GUI.setBounds(100,100,1150,600);
         main_GUI.setResizable(false);
 
         //Панель для добавления элементов
-        JPanel main_panel = new JPanel();
         main_panel.setLayout(null);
         main_panel.setBackground(new Color(224, 230, 245));
         main_GUI.add(main_panel);
@@ -255,7 +271,7 @@ public class MainPage {
 
         ActionListener actionExit = e -> System.exit(0);
 
-                //Кнопка "РАССЧИТАТЬ СТОИМОСТЬ"
+        //Кнопка "РАССЧИТАТЬ СТОИМОСТЬ"
         JButton button_exit = new JButton("ВЫХОД");
         button_exit.setBounds(800,320,200,50);
         button_exit.setBackground(new Color(255, 3, 49));
@@ -277,9 +293,6 @@ public class MainPage {
         buttonNewLogin.addActionListener(actionNewLogin);
         main_panel.add(buttonNewLogin);
 
-        main_GUI.setVisible(true);
-        main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         //Кнопка "ДОБАВИТЬ НОВЫЙ ГОРОД И КОЭФФИЦЕНТ"
         ActionListener actionNewCity = e -> {
             CreateCity createCity = new CreateCity();
@@ -292,24 +305,5 @@ public class MainPage {
         buttonNewCity.setFont(new Font("Times New Roman", Font.BOLD, 22));
         buttonNewCity.addActionListener(actionNewCity);
         main_panel.add(buttonNewCity);
-
-        main_GUI.setVisible(true);
-        main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    }
-    //Проверка формата вводимых данных (Объём)
-    public static boolean check_volume_format(String volume){
-        String regex ="\\d{1,4}\\s\\d{1,3}\\s\\d{1,3}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(volume);
-        return matcher.matches();
-    }
-
-    //Проверка формата вводимых данных (Вес)
-    public static boolean check_weight_format(String weight){
-        String regex ="\\d{1,5}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(weight);
-        return matcher.matches();
     }
 }
