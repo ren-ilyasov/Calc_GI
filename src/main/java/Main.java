@@ -9,6 +9,7 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        LoginPage loginPage = new LoginPage();
         MainPage mainPage = new MainPage();
     }
 

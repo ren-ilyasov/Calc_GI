@@ -12,22 +12,22 @@ import java.util.regex.Pattern;
 
 public class MainPage {
 
-    static String last_item_selected1 = Cities.items[0];
-    static JComboBox<String> combo_tarif;
+     String last_item_selected1 = Cities.items[0];
+     JComboBox<String> combo_tarif;
 
-    static String last_item_selected2 = Cities.items[1];
-    static JComboBox<String> combo_tarif2;
+     String last_item_selected2 = Cities.items[1];
+     JComboBox<String> combo_tarif2;
 
-    static TextField weight;
+     TextField weight;
 
-    static TextField volume;
+     TextField volume;
 
-    static JLabel labelOutput;
+     JLabel labelOutput;
 
     public MainPage(){
         //Окно приложения
         JFrame main_GUI = new JFrame("Victory");
-        main_GUI.setTitle ("Calc_GI");
+        main_GUI.setTitle ("Главная Страница");
         main_GUI.setBounds(100,100,1150,600);
         main_GUI.setResizable(false);
 
