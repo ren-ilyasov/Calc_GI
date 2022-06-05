@@ -1,6 +1,5 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collection;
+
 
 public class MathModel {
     public static Double sumkoef = null;

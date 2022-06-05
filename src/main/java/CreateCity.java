@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CreateCity extends Page{
 
@@ -43,12 +45,23 @@ public class CreateCity extends Page{
         //Кнопка "Добавить"
         ActionListener actionCityKoef = e -> {
             try {
-                Double koeF = Double.valueOf(koef.getText());
-                Cities.addCityKoef(city.getText(), koeF);
+                String regex ="\\d{1,2}.\\d{1}";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(koef.getText());
+                if (matcher.matches()){
+                    Double koeF = Double.valueOf(koef.getText());
+                    if(koeF<=10.0){
+                        Cities.addCityKoef(city.getText(), koeF);
+                        System.exit(0);
+                    }
+                }
+                JOptionPane.showMessageDialog(null,
+                        "Максимальный коэффицент равен 10.0(Владивосток)",
+                        "Неверно указан коэффицент!",
+                        JOptionPane.WARNING_MESSAGE);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-            System.exit(0);
         };
         JButton button_city = new JButton("Добавить");
         button_city.setBounds(120,250,150,50);
