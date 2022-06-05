@@ -32,27 +32,26 @@ public class LoginPage {
         main_panel.add(label3);
 
         //Текстовое поле "Логин"
-        {
-            TextField Login = new TextField("");
-            Login.setBounds(120, 100, 150, 30);
-            Login.setVisible(true);
-            Login.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-            main_panel.add(Login);
-        }
+            TextField login = new TextField("");
+            login.setBounds(120, 100, 150, 30);
+            login.setVisible(true);
+            login.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+            main_panel.add(login);
 
         //Текстовое поле "Пароль"
-        {
-            TextField Password = new TextField("");
-            Password.setBounds(120, 180, 150, 30);
-            Password.setVisible(true);
-            Password.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-            main_panel.add(Password);
-        }
+            TextField password = new TextField("");
+            password.setBounds(120, 180, 150, 30);
+            password.setVisible(true);
+            password.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+            main_panel.add(password);
 
         //Кнопка "ВХОД"
         ActionListener actionLogin = e -> {
-            MainPage mainPage = new MainPage();
-            main_GUI.setVisible(false);
+            if (LoginPassword.checkPassword(login.getText(), password.getText())){
+                MainPage mainPage = new MainPage();
+                main_GUI.setVisible(false);
+            }
+
         };
         JButton button_login = new JButton("ВХОД");
         button_login.setBounds(120,250,150,50);
