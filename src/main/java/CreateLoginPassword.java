@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class CreateLoginPassword extends Page{
 
@@ -41,11 +42,12 @@ public class CreateLoginPassword extends Page{
 
             //Кнопка "СОЗДАТЬ"
             ActionListener actionLogin = e -> {
-                if (!LoginPassword.checkPassword(login.getText(), password.getText())){
-                    MainPage mainPage = new MainPage();
-                    main_GUI.setVisible(false);
-
-                }
+                    try {
+                            LoginPassword.addPassword(login.getText(), password.getText());
+                    } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                    }
+                    System.exit(0);
 
             };
             JButton button_login = new JButton("СОЗДАТЬ");
