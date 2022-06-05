@@ -98,7 +98,7 @@ public class MainPage extends Page {
         main_panel.add(label7);
 
         //Выпадающий список
-        combo_tarif = new JComboBox<>(Cities.items);
+        combo_tarif = new JComboBox<>(Cities.cityKoef.keySet().toArray(new String[0]));
         combo_tarif.setSelectedItem(last_item_selected1);
         combo_tarif.setBounds(100,240,200,30);
         combo_tarif.setFont(new Font("Times New Roman", Font.ITALIC, 18));
@@ -130,7 +130,7 @@ public class MainPage extends Page {
 
         //Выпадающий список 2
         {
-            combo_tarif2 = new JComboBox<>(Cities.items);
+            combo_tarif2 = new JComboBox<>(Cities.cityKoef.keySet().toArray(new String[0]));
             combo_tarif2.setSelectedItem(last_item_selected2);
             combo_tarif2.setBounds(350, 240, 200, 30);
             combo_tarif2.setFont(new Font("Times New Roman", Font.ITALIC, 18));
@@ -226,13 +226,10 @@ public class MainPage extends Page {
                 return;
             }
             //Алгоритм расчёта коэффициентов
-            int item_selected1 = Arrays.asList(Cities.items).indexOf(last_item_selected1);
-            int item_selected2 = Arrays.asList(Cities.items).indexOf(last_item_selected2);
-
             if (check_weight_format(weight.getText())) {
                 int value = Integer.parseInt(weight.getText());
 
-                Integer sum=MathModel.price(item_selected1, item_selected2, value);
+                Integer sum=MathModel.price(last_item_selected1, last_item_selected2, value);
                 labelOutput.setText("Итоговая стоимость: "+ sum +" рублей");
                 labelOutput.setVisible(true);
 

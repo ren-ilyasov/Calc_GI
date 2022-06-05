@@ -1,10 +1,11 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class MathModel {
-    static Double[] koef = {1.0,1.4,3.0,1.8,1.3,1.2,1.9,1.2,2.5,1.7,1.7,1.8,4.0,1.1,1.6,1.8};
     public static Double sumkoef = null;
-    public static Integer price(int item_selected1, int item_selected2, int weight) {
-        sumkoef=koef[item_selected1]+koef[item_selected2];
+    public static Integer price(String item_selected1, String item_selected2, int weight) {
+         sumkoef=Cities.cityKoef.get(item_selected1)+Cities.cityKoef.get(item_selected2);
         if(sumkoef>2.0 &&sumkoef<=4.0){
             sumkoef/=2;
         }

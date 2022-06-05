@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class CreateCity extends Page{
 
@@ -26,30 +27,35 @@ public class CreateCity extends Page{
         main_panel.add(label3);
 
         //Текстовое поле "Добавить город"
-        TextField login = new TextField("");
-        login.setBounds(120, 100, 150, 30);
-        login.setVisible(true);
-        login.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        main_panel.add(login);
+        TextField city = new TextField("");
+        city.setBounds(120, 100, 150, 30);
+        city.setVisible(true);
+        city.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        main_panel.add(city);
 
         //Текстовое поле "Коэффицент нового города"
-        TextField password = new TextField("");
-        password.setBounds(120, 180, 150, 30);
-        password.setVisible(true);
-        password.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        main_panel.add(password);
+        TextField koef = new TextField("");
+        koef.setBounds(120, 180, 150, 30);
+        koef.setVisible(true);
+        koef.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        main_panel.add(koef);
 
         //Кнопка "Добавить"
-        ActionListener actionLogin = e -> {
-            MainPage mainPage = new MainPage();
-            main_GUI.setVisible(false);
+        ActionListener actionCityKoef = e -> {
+            try {
+                Double koeF = Double.valueOf(koef.getText());
+                Cities.addCityKoef(city.getText(), koeF);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            System.exit(0);
         };
-        JButton button_login = new JButton("Добавить");
-        button_login.setBounds(120,250,150,50);
-        button_login.setBackground(new Color(3, 8, 255));
-        button_login.setForeground(Color.white);
-        button_login.setFont(new Font("Times New Roman", Font.BOLD, 22));
-        button_login.addActionListener(actionLogin);
-        main_panel.add(button_login);
+        JButton button_city = new JButton("Добавить");
+        button_city.setBounds(120,250,150,50);
+        button_city.setBackground(new Color(3, 8, 255));
+        button_city.setForeground(Color.white);
+        button_city.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        button_city.addActionListener(actionCityKoef);
+        main_panel.add(button_city);
     }
 }
