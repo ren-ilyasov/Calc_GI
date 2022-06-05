@@ -157,6 +157,7 @@ public class MainPage {
         button_create.setBackground(new Color(255, 147, 3));
         button_create.setForeground(Color.white);
         button_create.setFont(new Font("Times New Roman", Font.BOLD, 22));
+
         //Проверка введённых значений
         ActionListener actionListener3 = e -> {
             if (check_volume_format(volume.getText())){
@@ -252,8 +253,20 @@ public class MainPage {
         button_create.addActionListener(actionListener3);
         main_panel.add(button_create);
 
+        ActionListener actionExit = e -> System.exit(0);
+
+                //Кнопка "РАССЧИТАТЬ СТОИМОСТЬ"
+        JButton button_exit = new JButton("ВЫХОД");
+        button_exit.setBounds(800,320,200,50);
+        button_exit.setBackground(new Color(255, 3, 49));
+        button_exit.setForeground(Color.white);
+        button_exit.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        button_exit.addActionListener(actionExit);
+        main_panel.add(button_exit);
+
         main_GUI.setVisible(true);
         main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
     //Проверка формата вводимых данных (Объём)
     public static boolean check_volume_format(String volume){
