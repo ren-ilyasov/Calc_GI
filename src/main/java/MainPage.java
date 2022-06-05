@@ -264,6 +264,35 @@ public class MainPage {
         button_exit.addActionListener(actionExit);
         main_panel.add(button_exit);
 
+        //Кнопка "СОЗДАТЬ НОВЫЙ ЛОГИН"
+        ActionListener actionNewLogin = e -> {
+            CreateLoginPassword createLogin = new CreateLoginPassword();
+            main_GUI.setVisible(false);
+        };
+        JButton buttonNewLogin = new JButton("СОЗДАТЬ ЛОГИН");
+        buttonNewLogin.setBounds(750,10,300,50);
+        buttonNewLogin.setBackground(new Color(3, 255, 7));
+        buttonNewLogin.setForeground(Color.white);
+        buttonNewLogin.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        buttonNewLogin.addActionListener(actionNewLogin);
+        main_panel.add(buttonNewLogin);
+
+        main_GUI.setVisible(true);
+        main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Кнопка "ДОБАВИТЬ НОВЫЙ ГОРОД И КОЭФФИЦЕНТ"
+        ActionListener actionNewCity = e -> {
+            CreateLoginPassword createLogin = new CreateLoginPassword();
+            main_GUI.setVisible(false);
+        };
+        JButton buttonNewCity = new JButton("ДОБАВИТЬ ГОРОД");
+        buttonNewCity.setBounds(750,60,300,50);
+        buttonNewCity.setBackground(new Color(3, 83, 255));
+        buttonNewCity.setForeground(Color.white);
+        buttonNewCity.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        buttonNewCity.addActionListener(actionNewCity);
+        main_panel.add(buttonNewCity);
+
         main_GUI.setVisible(true);
         main_GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
